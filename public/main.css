@@ -1,0 +1,19 @@
+body{
+    
+    background-color: aqua;
+    background-size: auto;
+}
+.form{
+    margin: auto;
+    padding: auto;
+    display: inline-table;
+    background-color: #acdaf1;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.submit{
+    text-align: center;
+    align-content: center;
+    padding-right: 1rem;
+    padding-left: 3ch;
+    align-items: center;
+}

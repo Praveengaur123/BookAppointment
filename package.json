@@ -1,0 +1,21 @@
+{
+  "name": "booking_app",
+  "version": "1.0.0",
+  "description": "\"Booking_Appointment_app\"",
+  "main": "Booking_app.js",
+  "scripts": {
+    "test": "test01",
+    "start": "nodemon Booking_app.js",
+    "start-server": "Booking_app.js"
+  },
+  "author": "Praveen Gaur",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.7.8",
+    "body-parser": "^1.20.3",
+    "express": "^4.21.1",
+    "mysql2": "^3.11.4",
+    "nodemon": "^3.1.7",
+    "sequelize": "^6.37.5"
+  }
+}
