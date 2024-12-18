@@ -6,18 +6,14 @@ const router=express.Router()
 
 const adminController=require('../controller/admin')
 
-router.get('/',(req,res)=>{
-    res.sendFile(path.join(__dirname,'../views','booking.html'))
-    console.log("here is routing")
-})
-//router.get('/admin',adminController.getApp)
+router.get('/',adminController.getBookingpage)
 
 // insert user
-router.post('/add-user',adminController.addUser)
+router.post('/user/add-user',adminController.addUser)
 
 // get all user
-router.get('/users',adminController.getUsers)
+router.get('/user/get-user',adminController.getUsers)
 
 // delete user
-router.delete('/delete-user/:id',adminController.deleteUser)
+router.delete('/user/delete-user/:id',adminController.deleteUser)
 module.exports=router;

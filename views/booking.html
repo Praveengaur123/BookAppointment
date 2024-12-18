@@ -10,7 +10,7 @@
 </head>
 
 <body>
-  <form class="form" id="userForm" onsubmit="handleFormSubmit(event)">
+  <form class="form" id="userForm" onsubmit="userDetail(event)">
     <h1>Book Your Appointment</h1><br>
     <label for="username">Username</label>
     <input type="text" name="username" id="username" ><br><br>
@@ -21,7 +21,72 @@
     <button type="submit" class="submit">Submit</button>
   </form>
   <ul id="userList"></ul>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.1/axios.min.js"></script>
+  <script src="../app.js"></script>
+  <!--javascript code-->
+<!-- <script>
+function userDetail(event){
+    event.preventDefault()
+  const name=event.target.username.value
+  const number=event.target.phone.value
+  const email=event.target.email.value
   
+  const obj={
+    name,
+    number,
+    email
+  };
+  // localStorage.setItem(obj.email,JSON.stringify(obj))
+  //showUser()
+  axios.post("http://localhost:8080/user/add-user",obj)
+  .then((response)=>{
+    console.log(response)
+    showUser(response.data.newUserDetail)
+  })
+  .catch((err)=>{
+    document.body.innerHTML=document.body.innerHTML+"<h3>something went wrong</h3>";
+    console.log(err)
+  })
+  }
+  
+    function showUser(obj){
+      const userList=document.getElementById('userList')
+  
+      // assign the iD
+      userList.id=obj.id
+      const list=document.createElement('li')
+      list.textContent=obj.name+'--'+obj.number+'--'+obj.email
+  
+      const deleteBtn=document.createElement('input')
+      deleteBtn.type="button"
+      deleteBtn.value="Delete"
+      deleteBtn.onclick=()=>{
+        axios.delete("",`${obj.id}`)
+        .then((response)=>{
+          userList.removeChild(list)
+        })
+        .catch((err)=>{
+          console.log(err)
+        })
+      }
+          list.appendChild(deleteBtn)
+          userList.appendChild(list)
+    }
+    window.addEventListener("DOMContentLoaded",()=>{
+    
+    axios.get("http://localhost:8080/user/get-user")
+    .then((response)=>{
+      console.log(response);
+      for(let i=0;i<response.data.length;i++){
+        showUser(response.data[i])
+    }
+    })
+    .catch((err)=>{
+      console.log(err)
+  
+    })
+  })
+</script> -->
 </body>
-<script src="app.js">console.log("htmlserver")</script>
+
 </html>

@@ -1,49 +1,62 @@
 const path=require('path')
-
-const express=require('express')
 const rootDir=require('../util/path')
 console.log("here is controller")
 const User=require('../models/appointment')
 
-/*exports.getApp=((req,res)=>{
-     res.sendFile(path.join(__dirname,'../views','booking.html'))
 
-})*/
+exports.addUser=async(req,res,next)=>{
 
-//inserting user 
-
-exports.addUser=(req,res,next)=>{
-     //res.sendFile(path.join(__dirname,'../views','booking.html'))
-    const {username,email,phone}=req.body
+    try{   
+    const username=req.body.username;
+    const phone=req.body.phone;
+    const email=req.body.email;
     console.log(req.body)
-    console.log("here is add user")
-    User.create({username,email,phone})
-    .then(result=>{
-        res.status(201).json({user:result})
-        console.log(result);
-    })
-    .catch(err=>{
-        console.log(err);
-        res.status(500).json({error:'failed to create user'})
-    })
+    if(req.body.phone==undefined){
+        throw new Error("Phone number is mandatory");
+        
+    }
+    const data=await User.create({username:username,email:email,phone:phone})
+    console.log("created user",data)
+  
+    return res.status(201).json({newUserDetail:data})
+    
+    //res.redirect('/user/add-user');
+    }
+    catch(err){
+        console.log("error in adding user",err.message)
+         return res.status(500).json({err:err.message})
+    }
 
 }
 
 //get all users
-exports.getUsers=(req,res)=>{
-    User.findAll()
-    .then(result=>{
-        res.status(201).json(result)
-    })
-    .catch(err=>console.log(err))
+exports.getUsers=async(req,res)=>{
+    
+    try{
+        const users=await User.findAll()
+        res.status(200).json({allNewUser:users})
+    }
+    catch(error){
+        console.log("Get user is failed",JSON.stringify(error))
+        res.status(500).json({error:error})
+    }
 }
 
 // deleting the users
-exports.deleteUser=(req,res)=>{
+exports.deleteUser=async(req,res)=>{
     const id=req.params.id;
-    User.destroy({where:{id}})
-    .then(result=>{
-
-    })
-    .catch(err=>console.log(err))
+    if(id==undefined){
+        return res.Status(400).json({err:"Id is missing"})
+    }
+    try{
+    await User.destroy({where:{id}})
+    res.sendStatus(200)
+    } catch(err){
+        console.log(err)
+        res.sendStatus(500).json(err)
+    }
+    
+}
+exports.getBookingpage=(req,res)=>{
+    res.sendFile(path.join(__dirname,"../views",'booking.html'))
 }

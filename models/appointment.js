@@ -19,11 +19,13 @@ const User=sequelize.define('User',{
     email:{
         type:Sequelize.STRING,
         allowNull:false,
-        validate:{isEmail:true}
+        validate:{isEmail:true},
+        unique:true
     },
     phone:{
-        type:Sequelize.INTEGER,
-        allowNull:false
-    }
+        type:Sequelize.STRING,
+        allowNull:false,
+        unique:true
+    },
 })
 module.exports=User
